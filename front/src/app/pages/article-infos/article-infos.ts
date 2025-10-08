@@ -39,10 +39,13 @@ export class ArticleInfos implements OnInit {
       const url = `http://localhost:8080/articles/${this.articleId}`;
       
       this.httpClient.delete(url).subscribe({
-        next: (response: any) => {
-          if (response.code === "200") {
+        next: ({ code }: any) => {
+          if (code === 200) {
             this.router.navigate(['/article-list']);
+          } else {
+            console.error('L\'article n\'existe pas:', code);
           }
+
         }
       });
     }

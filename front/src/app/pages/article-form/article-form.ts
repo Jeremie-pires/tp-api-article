@@ -30,6 +30,7 @@ export class ArticleForm implements OnInit {
     this.articleId = this.route.snapshot.paramMap.get('_id');
     
     if (this.articleId) {
+      this.isEditMode = true;
       this.articleService.loadArticle(this.articleId).subscribe(
         article => this.article = article
       );
