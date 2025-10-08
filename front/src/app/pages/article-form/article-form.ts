@@ -14,23 +14,25 @@ import { ArticleService } from '../../services/article-service';
   styleUrl: './article-form.scss'
 })
 export class ArticleForm implements OnInit {
+
   article: Article = new Article();
   articleId: string | null = null;
   isEditMode: boolean = false;
-  articleService: any;
 
   constructor(
     private readonly httpClient: HttpClient,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    public readonly articleService: ArticleService
   ) {}
 
   ngOnInit() {
     this.articleId = this.route.snapshot.paramMap.get('_id');
     
     if (this.articleId) {
-      this.isEditMode = true;
-      this.articleService.loadArticle(this.articleId);
+      this.articleService.loadArticle(this.articleId).subscribe(
+        article => this.article = article
+      );
     }
   }
 
