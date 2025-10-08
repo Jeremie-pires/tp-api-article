@@ -1,0 +1,38 @@
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
+import { User } from '../../../Models/user';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-login',
+  imports: [RouterModule, FormsModule, CommonModule],
+  templateUrl: './login.html',
+  styleUrl: './login.scss'
+})
+export class Login {
+  user: User = new User();
+  errorMessage: string = '';
+
+  constructor(
+    private readonly httpClient: HttpClient,
+    private readonly router: Router
+  ) {}
+
+  login() {
+    const url = 'http://localhost:8080/login';
+    this.errorMessage = '';
+    
+    this.httpClient.post(url, this.user).subscribe({
+      next: (response: any) => {
+        if (response.code === "200") {
+          localStorage.setItem('token', response.data);
+          this.router.navigate(['/article-list']);
+        } else {
+          this.errorMessage = 'Email ou mot de passe incorrect';
+        }
+      }
+    });
+  }
+}

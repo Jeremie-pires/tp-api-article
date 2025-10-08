@@ -1,0 +1,19 @@
+<h2>Détail de l'article {{ article.title }}</h2>
+<div id="article" class="uk-card uk-card-default ">
+    <h3>{{ article.title }}</h3>
+    <p>{{ article.desc }}</p>
+    <p>{{ article.author }}</p>
+    <img [src]="article.imgPath" [alt]="article.title">
+    
+    <div class="uk-margin-top">
+        <button [routerLink]="['/article-form', article._id]" class="uk-button uk-button-primary uk-margin-right">
+            Modifier
+        </button>
+        <button (click)="deleteArticle()" class="uk-button uk-button-danger uk-margin-right">
+            Supprimer
+        </button>
+        <a [routerLink]="['/article-list']" class="uk-button uk-button-default">
+            Retour
+        </a>
+    </div>
+</div>  

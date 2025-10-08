@@ -1,0 +1,77 @@
+<div id="signup-container">
+  <h2 id="signup-title">S'inscrire</h2>
+
+  <div id="signup-card" class="uk-card uk-card-default uk-card-body">
+    <form id="signup-form" class="uk-form-stacked" (ngSubmit)="signup()">
+      
+      <div id="email-field" class="uk-margin">
+        <label class="uk-form-label" for="email-input">Email *</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="email-input" type="email" [(ngModel)]="user.email" name="email" placeholder="nom@domaine.com" pattern="[^\s@]+@[^\s@]+\.[^\s@]+"title="Format requis: nom@domaine.com"required>
+        </div>
+      </div>
+
+      <div id="pseudo-field" class="uk-margin">
+        <label class="uk-form-label" for="pseudo-input">Pseudo *</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="pseudo-input" type="text" [(ngModel)]="user.pseudo" name="pseudo" placeholder="Votre pseudo" required>
+        </div>
+      </div>
+
+      <div id="password-field" class="uk-margin">
+        <label class="uk-form-label" for="password-input">Mot de passe *</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="password-input" type="password" [(ngModel)]="user.password" name="password" placeholder="Votre mot de passe" required>
+        </div>
+      </div>
+
+      <div id="password-confirm-field" class="uk-margin">
+        <label class="uk-form-label" for="password-confirm-input">Confirmer le mot de passe *</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="password-confirm-input" type="password" [(ngModel)]="passwordConfirm" name="passwordConfirm" placeholder="Confirmez votre mot de passe" required>
+        </div>
+      </div>
+
+      <div id="city-field" class="uk-margin">
+        <label class="uk-form-label" for="city-input">Ville *</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="city-input" type="text" [(ngModel)]="user.city" name="city" placeholder="Votre ville" required>
+        </div>
+      </div>
+
+      <div id="citycode-field" class="uk-margin">
+        <label class="uk-form-label" for="citycode-input">Code postal *</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="citycode-input" type="text" [(ngModel)]="user.cityCode" name="cityCode" placeholder="12345" pattern="\d{5}"maxlength="5"title="5 chiffres requis (ex: 75001)"required>
+        </div>
+      </div>
+
+      <div id="phone-field" class="uk-margin">
+        <label class="uk-form-label" for="phone-input">Téléphone *</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="phone-input" type="tel" [(ngModel)]="user.phone" name="phone" placeholder="0123456789" pattern="\d{10}"maxlength="10"title="10 chiffres requis (ex: 0123456789)"required>
+        </div>
+      </div>
+
+      <div id="error-message" class="uk-margin" *ngIf="errorMessage">
+        <div class="uk-alert-danger" uk-alert>
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+
+      <div id="signup-actions" class="uk-margin">
+        <button id="signup-btn" class="uk-button uk-button-primary" type="submit">
+          S'inscrire
+        </button>
+      </div>
+
+      <div id="signup-links" class="uk-text-center">
+        <p>
+          Déjà un compte ? 
+          <a routerLink="/login">Se connecter</a>
+        </p>
+      </div>
+
+    </form>
+  </div>
+</div>

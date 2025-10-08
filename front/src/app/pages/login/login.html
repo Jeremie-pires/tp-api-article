@@ -1,0 +1,45 @@
+<div id="login-container">
+  <h2 id="login-title">Se connecter</h2>
+
+  <div id="login-card" class="uk-card uk-card-default uk-card-body">
+    <form id="login-form" class="uk-form-stacked" (ngSubmit)="login()">
+      
+      <div id="email-field" class="uk-margin">
+        <label class="uk-form-label" for="email-input">Email</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="email-input" type="email" [(ngModel)]="user.email" name="email" placeholder="votre@email.com" required>
+        </div>
+      </div>
+
+      <div id="password-field" class="uk-margin">
+        <label class="uk-form-label" for="password-input">Mot de passe</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="password-input" type="password" [(ngModel)]="user.password" name="password" placeholder="Votre mot de passe" required>
+        </div>
+      </div>
+
+      <div id="error-message" class="uk-margin" *ngIf="errorMessage">
+        <div class="uk-alert-danger" uk-alert>
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+
+      <div id="login-actions" class="uk-margin">
+        <button id="login-btn" class="uk-button uk-button-primary" type="submit">
+          Se connecter
+        </button>
+      </div>
+
+      <div id="login-links" class="uk-text-center">
+        <p>
+          <a routerLink="/forgot-password">Mot de passe oublié ?</a>
+        </p>
+        <p>
+          Pas encore de compte ? 
+          <a routerLink="/signup">S'inscrire</a>
+        </p>
+      </div>
+
+    </form>
+  </div>
+</div>

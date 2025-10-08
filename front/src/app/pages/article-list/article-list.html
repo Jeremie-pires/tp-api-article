@@ -1,0 +1,34 @@
+<div class="article-list-container">
+  <!-- Header avec titre et bouton déconnexion -->
+  <div class="article-header">
+    <h2>Liste des articles</h2>
+    <button class="logout-btn uk-button uk-button-danger uk-button-small" (click)="logout()">
+      Se déconnecter
+    </button>
+  </div>
+
+  <div class="article-actions uk-margin-bottom">
+    <button class="uk-button uk-button-primary uk-margin-right" (click)="displayArticles()">
+      Afficher les articles
+    </button>
+    <a routerLink="/article-form" class="uk-button uk-button-secondary">
+      Ajouter un article
+    </a>
+  </div>
+
+  <div class="articles-grid">
+    @for (article of articles; track article) {
+      <div class="article-card uk-card uk-card-default uk-card-body">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.desc }}</p>
+        <p class="article-author"><strong>Par:</strong> {{ article.author }}</p>
+        <img [src]="article.imgPath" [alt]="article.title" class="article-image">
+        <div class="article-card-actions uk-margin-top">
+          <a [routerLink]="['/article-infos', article._id]" class="uk-button uk-button-primary uk-button-small">
+            Voir plus
+          </a>
+        </div>
+      </div>          
+    }
+  </div>
+</div>

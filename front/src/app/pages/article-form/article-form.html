@@ -1,0 +1,54 @@
+<div id="article-form-container">
+  <h2 id="form-title">{{ isEditMode ? 'Modifier l\'article' : 'Créer un nouvel article' }}</h2>
+
+  <div id="form-card" class="uk-card uk-card-default uk-card-body">
+    <form id="article-form" class="uk-form-stacked" (ngSubmit)="saveArticle()">
+      
+      <div id="title-field" class="uk-margin">
+        <label class="uk-form-label" for="title-input">Titre</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="title-input" type="text" [(ngModel)]="article.title" name="title" placeholder="Titre de l'article" required>
+        </div>
+      </div>
+
+      <div id="desc-field" class="uk-margin">
+        <label class="uk-form-label" for="desc-input">Description</label>
+        <div class="uk-form-controls">
+          <textarea class="uk-textarea" id="desc-input" [(ngModel)]="article.desc" name="desc" rows="5" placeholder="Description de l'article" required></textarea>
+        </div>
+      </div>
+
+      <div id="author-field" class="uk-margin">
+        <label class="uk-form-label" for="author-input">Auteur</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="author-input" type="text" [(ngModel)]="article.author" name="author" placeholder="Nom de l'auteur" required>
+        </div>
+      </div>
+
+      <div id="image-field" class="uk-margin">
+        <label class="uk-form-label" for="image-input">URL de l'image</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" id="image-input" type="text" [(ngModel)]="article.imgPath" name="imgPath" placeholder="https://exemple.com/image.jpg" required>
+        </div>
+      </div>
+
+      <div id="preview-section" class="uk-margin">
+        <div class="uk-form-label">Prévisualisation</div>
+        <img id="preview-image" [src]="article.imgPath" [alt]="article.title">
+      </div>
+
+      <div id="form-actions" class="uk-margin">
+        <button id="save-btn" class="uk-button uk-button-primary" type="submit">
+          {{ isEditMode ? 'Mettre à jour' : 'Créer l\'article' }}
+        </button>
+        <a 
+          id="cancel-btn" 
+          [routerLink]="isEditMode ? ['/article-infos', article._id] : ['/article-list']" 
+          class="uk-button uk-button-default">
+          Annuler
+        </a>
+      </div>
+
+    </form>
+  </div>
+</div>  

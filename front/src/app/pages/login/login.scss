@@ -1,0 +1,140 @@
+#login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+#login-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+#login-card {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  border: none;
+}
+
+#login-form {
+  .uk-margin {
+    margin-bottom: 25px;
+  }
+
+  .uk-form-label {
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  .uk-input {
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    padding: 12px 16px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: #0f6ecd;
+      box-shadow: 0 0 0 3px rgba(15, 110, 205, 0.1);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+}
+
+#email-field,
+#password-field {
+  .uk-input {
+    width: 100%;
+  }
+}
+
+#login-actions {
+  text-align: center;
+  margin-top: 30px;
+}
+
+#error-message {
+  .uk-alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 0;
+    
+    p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
+
+#login-btn {
+  width: 100%;
+  padding: 12px 0;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 6px;
+  background-color: #0f6ecd;
+  border: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0d5bb7;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+#login-links {
+  margin-top: 25px;
+  
+  p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666;
+  }
+
+  a {
+    color: #0f6ecd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #0d5bb7;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #login-container {
+    margin: 20px auto;
+    padding: 15px;
+    max-width: 350px;
+  }
+
+  #login-title {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+
+  #login-card {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .uk-input {
+    font-size: 14px !important;
+  }
+}
