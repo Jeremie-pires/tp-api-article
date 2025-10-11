@@ -18,6 +18,7 @@ export class ArticleForm implements OnInit {
   article: Article = new Article();
   articleId: string | null = null;
   isEditMode: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private readonly httpClient: HttpClient,
@@ -38,12 +39,38 @@ export class ArticleForm implements OnInit {
   }
 
   saveArticle() {
-    const url = 'http://localhost:8080/articles/save';
+    this.errorMessage = '';
     
+    if (!this.validateForm()) {
+      return;
+    }
+
+    const url = 'http://localhost:8080/articles/save';
+
+ 
     this.httpClient.post(url, this.article).subscribe({
       next: ({ data }: any) => {
         this.router.navigate(['/article-list']);
       }
     });
   }
+
+    validateForm(): boolean {
+      if (!this.article.title || !this.article.desc || !this.article.author || !this.article.imgPath) {
+        this.errorMessage = 'Tous les champs sont obligatoires.';
+        return false;
+      }
+    
+      if (this.article.imgPath && !this.isValidUrl(this.article.imgPath)) {
+        this.errorMessage = 'L\'URL de l\'image n\'est pas valide.';
+        return false;
+      }
+    
+      return true;
+    }
+
+  private isValidUrl(url: string): boolean {
+  const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+  return urlPattern.test(url);
+}
 }

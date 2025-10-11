@@ -1,6 +1,7 @@
 # .gitignore pour le projet TPAPI
 # Ignore les dépendances et artefacts build pour le front (Angular/Node) et le back (Java/Gradle)
 
+Slide_TP_JavaSpring.pdf
 ## -----------------------
 # Node / Angular (front)
 ## -----------------------
