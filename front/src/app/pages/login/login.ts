@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-login',
   imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './login.html',
-  styleUrl: './login.scss'
+  standalone: true
 })
 export class Login {
   user: User = new User();
@@ -21,17 +21,22 @@ export class Login {
   ) {}
 
   login() {
-    const url = 'http://localhost:8080/login';
+    const url = 'http://localhost:8080/users/login';
     this.errorMessage = '';
     
     this.httpClient.post(url, this.user).subscribe({
       next: (response: any) => {
-        if (response.code === "200") {
+        console.log('Response login:', response);
+        if (response.code === 200) {
           localStorage.setItem('token', response.data);
           this.router.navigate(['/article-list']);
         } else {
-          this.errorMessage = 'Email ou mot de passe incorrect';
+          this.errorMessage = response.message || 'Email ou mot de passe incorrect';
         }
+      },
+      error: (error) => {
+        console.error('Error login:', error);
+        this.errorMessage = 'Erreur lors de la connexion';
       }
     });
   }

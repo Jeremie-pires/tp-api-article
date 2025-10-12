@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Article } from '../../../Models/article';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ArticleService } from '../../services/article-service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-article-form',
   imports: [RouterModule, FormsModule, CommonModule],
   providers: [ArticleService],
   templateUrl: './article-form.html',
-  styleUrl: './article-form.scss'
+  standalone: true
 })
 export class ArticleForm implements OnInit {
 
@@ -38,39 +38,46 @@ export class ArticleForm implements OnInit {
     }
   }
 
-  saveArticle() {
+  updateArticle() {
     this.errorMessage = '';
-    
-    if (!this.validateForm()) {
-      return;
-    }
 
-    const url = 'http://localhost:8080/articles/save';
+    const url = `http://localhost:8080/articles/${this.articleId}`;
 
  
-    this.httpClient.post(url, this.article).subscribe({
-      next: ({ data }: any) => {
-        this.router.navigate(['/article-list']);
+    this.httpClient.put(url, this.article).subscribe({
+      next: (response: any) => {
+        console.log('Response updateArticle:', response);
+        if (response.code === 200) {
+          this.router.navigate(['/article-list']);
+        } else {
+          this.errorMessage = response.message || 'Erreur lors de la mise à jour de l\'article';
+        }
+      },
+      error: (error) => {
+        console.error('Error updateArticle:', error);
+        this.errorMessage = 'Erreur lors de la mise à jour de l\'article';
       }
     });
   }
 
-    validateForm(): boolean {
-      if (!this.article.title || !this.article.desc || !this.article.author || !this.article.imgPath) {
-        this.errorMessage = 'Tous les champs sont obligatoires.';
-        return false;
-      }
-    
-      if (this.article.imgPath && !this.isValidUrl(this.article.imgPath)) {
-        this.errorMessage = 'L\'URL de l\'image n\'est pas valide.';
-        return false;
-      }
-    
-      return true;
-    }
+  addArticle() {
+    this.errorMessage = '';
 
-  private isValidUrl(url: string): boolean {
-  const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
-  return urlPattern.test(url);
-}
+    const url = 'http://localhost:8080/articles';
+    
+    this.httpClient.post(url, this.article).subscribe({
+      next: (response: any) => {
+        console.log('Response addArticle:', response);
+        if (response.code === 200) {
+          this.router.navigate(['/article-list']);
+        } else {
+          this.errorMessage = response.message || 'Erreur lors de l\'ajout de l\'article';
+        }
+      },
+      error: (error) => {
+        console.error('Error addArticle:', error);
+        this.errorMessage = 'Erreur lors de l\'ajout de l\'article';
+      }
+    });
+  }
 }

@@ -18,13 +18,12 @@ public class ArticleController {
 
     @GetMapping("/articles")
     public ResponseDTO displayArticleList() {
-        return articleService.showArticleList();
+        return articleService.getArticleList();
     }
-
 
     @GetMapping("/articles/{_id}")
     public ResponseDTO displayArticleById(@PathVariable("_id") String _id) {
-        return articleService.showArticleById(_id);
+        return articleService.getArticleById(_id);
     }
 
     @DeleteMapping("/articles/{_id}")
@@ -32,8 +31,13 @@ public class ArticleController {
         return articleService.deleteArticleById(_id);
     }
 
-    @PostMapping("/articles/save/{_id}")
-    public Article modifyArticleById(@PathVariable("_id") String _id, @RequestBody Article article) {
+    @PutMapping("/articles/{_id}")
+    public ResponseDTO modifyArticleById(@PathVariable("_id") String _id, @RequestBody Article article) {
         return articleService.modifyArticleById(_id, article);
+    }
+
+    @PostMapping("/articles")
+    public ResponseDTO addArticle(@RequestBody Article article) {
+        return articleService.addArticle(article);
     }
 }

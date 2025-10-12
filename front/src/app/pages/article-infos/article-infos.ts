@@ -9,7 +9,7 @@ import { ArticleService } from '../../services/article-service';
   imports: [RouterModule],
   providers: [ArticleService],
   templateUrl: './article-infos.html',
-  styleUrl: './article-infos.scss'
+  standalone: true
 })
 export class ArticleInfos implements OnInit {
 
@@ -39,13 +39,16 @@ export class ArticleInfos implements OnInit {
       const url = `http://localhost:8080/articles/${this.articleId}`;
       
       this.httpClient.delete(url).subscribe({
-        next: ({ code }: any) => {
-          if (code === 200) {
+        next: (response: any) => {
+          console.log('Response deleteArticle:', response);
+          if (response.code === 200) {
             this.router.navigate(['/article-list']);
           } else {
-            console.error('L\'article n\'existe pas:', code);
+            console.error('Erreur lors de la suppression:', response.message);
           }
-
+        },
+        error: (error) => {
+          console.error('Error deleteArticle:', error);
         }
       });
     }

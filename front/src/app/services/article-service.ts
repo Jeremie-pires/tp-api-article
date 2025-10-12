@@ -17,9 +17,14 @@ export class ArticleService {
       const url = `http://localhost:8080/articles/${_id}`;
       
       return this.httpClient.get(url).pipe(
-        map(({ data }: any) => {
-          this.data = Object.assign(new Article(), data);
-          return this.data;
+        map((response: any) => {
+          console.log('Response loadArticle:', response);
+          if (response.code === 200) {
+            this.data = Object.assign(new Article(), response.data);
+            return this.data;
+          } else {
+            throw new Error(response.message || 'Erreur lors du chargement de l\'article');
+          }
         })
       );
     }

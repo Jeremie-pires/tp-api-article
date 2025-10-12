@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-lobby',
   imports: [RouterModule],
   templateUrl: './lobby.html',
-  styleUrl: './lobby.scss'
+  standalone: true
 })
 export class Lobby {
 
